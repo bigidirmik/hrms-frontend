@@ -1,3 +1,4 @@
+# DIAGRAM GÜNCELLENECEK!
 ![Diagram](https://github.com/bigidirmik/hrms-frontend/blob/master/HRMS%20Diagram.png)
 
 # Getting Started with Create React App
