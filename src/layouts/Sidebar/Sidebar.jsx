@@ -1,11 +1,12 @@
 import React from "react";
 import { Menu } from 'semantic-ui-react';
 import CityList from "../../pages/CityList";
+import JobTitleList from "../../pages/JobTitleList";
 
 export default function Sidebar() {
   return (
     <div>
-      <Menu pointing vertical>
+      <Menu vertical>
         <Menu.Item
           name='home'
         />
@@ -18,6 +19,10 @@ export default function Sidebar() {
       </Menu>
 
       <CityList/>
+
+      <br></br>
+
+      <JobTitleList/>
       
     </div>
   );
