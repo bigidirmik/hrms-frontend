@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu } from 'semantic-ui-react';
+import CityList from "../../pages/CityList";
 
 export default function Sidebar() {
   return (
@@ -15,6 +16,9 @@ export default function Sidebar() {
           name='friends'
         />
       </Menu>
+
+      <CityList/>
+      
     </div>
   );
 }
