@@ -1,63 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import JobAdvertisementService from "../services/jobAdvertisementService";
+import { Button, Icon, Item, Label } from "semantic-ui-react";
 
 export default function JobAdvertisementList() {
-  const [jobAdvertisements, setjobAdvertisements] = useState([]);
+  const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
       .getJobAdvertisements()
-      .then(result => setjobAdvertisements(result.data.data));
-  });
+      .then((result) => setJobAdvertisements(result.data.data));
+  }, []);
 
   return (
     <div>
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>İşveren</Table.HeaderCell>
-            <Table.HeaderCell>İş Başlığı</Table.HeaderCell>
-            <Table.HeaderCell>Şehir</Table.HeaderCell>
-            <Table.HeaderCell>Bitiş Tarihi</Table.HeaderCell>
-            <Table.HeaderCell>Açık Pozisyon</Table.HeaderCell>
-            <Table.HeaderCell>Ücret</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+      <Item.Group divided>
+        {jobAdvertisements.map((jobAdvertisement) => (
+          <Item key={jobAdvertisement.id}>
+            <Item.Image src={jobAdvertisement.employer.logo.url} />
 
-        <Table.Body>
-          {jobAdvertisements.map((jobAdvertisement) => (
-            <Table.Row key={jobAdvertisement.id}>
-              <Table.Cell>{jobAdvertisement.employer.companyName}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.jobTitle.title}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.city.cityName}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.applicationDeadline}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.positionQuota}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.salaryMin}<strong>/</strong>{jobAdvertisement.salaryMax}<strong> ₺</strong></Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-
-        <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan="3">
-              <Menu floated="right" pagination>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron left" />
-                </Menu.Item>
-                <Menu.Item as="a">1</Menu.Item>
-                <Menu.Item as="a">2</Menu.Item>
-                <Menu.Item as="a">3</Menu.Item>
-                <Menu.Item as="a">4</Menu.Item>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron right" />
-                </Menu.Item>
-              </Menu>
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
+            <Item.Content>
+              <Item.Header as="a">
+                {jobAdvertisement.jobTitle.title}
+              </Item.Header>
+              <Item.Meta>
+                <span>{jobAdvertisement.employer.companyName}</span>
+              </Item.Meta>
+              <Item.Description>
+                {jobAdvertisement.description}
+              </Item.Description>
+              <Item.Extra>
+                <Button secondary floated="right">
+                  <Link to={`/job-advertisement-detail/${jobAdvertisement.id}`}>
+                    İlan Detayı
+                  </Link>
+                  <Icon name="right chevron" />
+                </Button>
+                <Label
+                  icon="clock"
+                  content={jobAdvertisement.workingTime.workingTime}
+                />
+                <Label
+                  icon="globe"
+                  content={jobAdvertisement.typeOfJob.typeOfJob}
+                />
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        ))}
+      </Item.Group>
     </div>
   );
 }

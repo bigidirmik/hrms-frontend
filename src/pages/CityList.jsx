@@ -8,18 +8,17 @@ export default function CityList() {
   useEffect(() => {
     let cityService = new CityService();
     cityService.getCities().then((result) => setcities(result.data.data));
-  });
+  }, []);
 
   return (
     <div>
-      <Dropdown
+      <Dropdown style={{marginRight:"3.5em"}}
         placeholder="Şehir seçiniz"
         selection
         options={cities.map((city) => (
-          <option key={city.id}>
-            {city.cityName}
-          </option>
-        ))}/>
+          <Dropdown.Item key={city.id}>{city.cityName}</Dropdown.Item>
+        ))}
+      ></Dropdown>
     </div>
   );
 }

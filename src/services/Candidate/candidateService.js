@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default class CandidateService{
 
+    registerCandidate(){
+        return axios.post("http://localhost:8080/api/candidates/add",values)
+    }
+
     getCandidates(){
         return axios.get("http://localhost:8080/api/candidates/getAll")
     }

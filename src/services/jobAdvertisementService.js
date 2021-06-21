@@ -30,4 +30,9 @@ export default class JobAdvertisementService{
         return axios.get("http://localhost:8080/api/job-advertisements/getByQueryActiveAndAppDeadlineAsc")
     }
 
+
+    add(values){
+        return axios.post("http://localhost:8080/api/job-advertisements/add",values)
+    }
+
 }

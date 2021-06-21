@@ -10,4 +10,8 @@ export default class ImageService{
         return axios.get("http://localhost:8080/api/images/getByCandidateId")
     }
 
+    getImageByEmployerId(){
+        return axios.get("http://localhost:8080/api/images/getByEmployerId")
+    }
+
 }
