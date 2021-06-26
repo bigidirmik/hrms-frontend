@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class CandidateService{
 
-    registerCandidate(){
+    add(values){
         return axios.post("http://localhost:8080/api/candidates/add",values)
     }
 
@@ -19,16 +19,16 @@ export default class CandidateService{
     }
 
 
-    getCandidateById(){
-        return axios.get("http://localhost:8080/api/candidates/findById")
+    getCandidateById(candidateId){
+        return axios.get("http://localhost:8080/api/candidates/findById?candidateId=" + candidateId)
     }
 
-    getCandidateByEmail(){
-        return axios.get("http://localhost:8080/api/candidates/findByEmail")
+    getCandidateByEmail(email){
+        return axios.get("http://localhost:8080/api/candidates/findByEmail?email=" + email)
     }
 
-    getCandidateByNationalityId(){
-        return axios.get("http://localhost:8080/api/candidates/findByNationalityId")
+    getCandidateByNationalityId(nationalityId){
+        return axios.get("http://localhost:8080/api/candidates/findByNationalityId?nationalityId=" + nationalityId)
     }
 
 }

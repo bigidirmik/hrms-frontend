@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import CandidateService from "../services/Candidate/candidateService"
+import {login} from "../store/actions/candidateActions"
+import { toast } from "react-toastify";
 
 export default function Login(signIn) {
+
+  const [candidate, setCandidate] = useState([])
+
+  const dispatch = useDispatch()
+
   let history = useHistory();
 
-  function handleLogin() {
-    history.push("/");
+  function handleLogin(values) {
+    let candidateService = new CandidateService();
+    candidateService.getCandidateByEmail(values.email).then(result=>setCandidate(result.data.data))
+    console.log("handleLogin: " + candidate)
+    //dispatch(login({candidate}))
+    //toast.success(`Hoşgeldin ${candidate.firstName}`)
+    //history.push("/")
   }
 
   return (
@@ -22,8 +36,8 @@ export default function Login(signIn) {
           password: Yup.string().required("Parola boş bırakılamaz!"),
         })}
         onSubmit={(values) => {
-          console.log(values);
-          handleLogin();
+          console.log("onSubmit: " + values.email);
+          handleLogin(values);
         }}
       >
         {({
@@ -63,7 +77,7 @@ export default function Login(signIn) {
 
             <button
               type="submit"
-              onClick={signIn}
+              onClick={handleLogin(values)}
               disabled={!dirty || isSubmitting}
             >
               Giriş Yap

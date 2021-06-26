@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
 
 export default function Navi() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { candidateInitials } = useSelector((state) => state.candidate);
+
   let history = useHistory();
+
   function handleSignOut() {
-    setIsAuthenticated(false);
     history.push("/");
   }
 
   function handleSignIn() {
-    setIsAuthenticated(true);
     history.push("/login");
   }
 
@@ -24,11 +26,13 @@ export default function Navi() {
           <Menu.Item icon="home" as={NavLink} to="/" />
 
           <Menu.Menu position="right">
-            {isAuthenticated ? (
+            
+              {candidateInitials.length===0 && <SignedOut signIn={handleSignIn} />}
+
+              {candidateInitials.length>1 && <SignedIn signOut={handleSignOut} />}
+
               <SignedIn signOut={handleSignOut} />
-            ) : (
-              <SignedOut signIn={handleSignIn} />
-            )}
+            
           </Menu.Menu>
         </Container>
       </Menu>

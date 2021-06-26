@@ -14,8 +14,8 @@ export default class UserService{
         return axios.get("http://localhost:8080/api/users/getAllByPage")
     }
 
-    getUserByEmail(){
-        return axios.get("http://localhost:8080/api/users/findByEmail")
+    getUserByEmail(email){
+        return axios.get("http://localhost:8080/api/users/findByEmail?email=" + email)
     }
 
 }

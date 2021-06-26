@@ -7,11 +7,13 @@ import Profile from "../../pages/Profile";
 import Sidebar from "../Sidebar/Sidebar";
 import Login from "../../pages/Login";
 import AddJobAdvertisement from "../../pages/AddJobAdvertisement";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
 
   return (
     <div>
+      <ToastContainer position="bottom-right"/>
       <Grid divided>
         <Grid.Row>
           <Grid.Column width={4}>

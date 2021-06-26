@@ -14,7 +14,8 @@ export default function JobTitleList() {
 
   return (
     <div>
-      <Dropdown style={{marginRight:"3.5em"}}
+      <Dropdown 
+        style={{marginRight:"3.5em"}}
         placeholder="Başlık seçiniz"
         selection
         options={jobTitles.map((jobTitle) => (
