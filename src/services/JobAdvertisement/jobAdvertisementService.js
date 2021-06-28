@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default class JobAdvertisementService{
 
+    findById(id){
+        return axios.get("http://localhost:8080/api/job-advertisements/findById?id=" + id)
+    }
+
     getJobAdvertisements(){
         return axios.get("http://localhost:8080/api/job-advertisements/getAll")
     }

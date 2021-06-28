@@ -1,37 +1,54 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
+import CandidateService from "../../services/Candidate/candidateService";
 
-export default function SignedIn({ signOut }) {
-  const { candidateInitials } = useSelector((state) => state.candidate);
+export default function SignedIn(props) {
+  const [candidate, setCandidate] = useState({
+    id: parseInt(""),
+    firstName: "",
+    image: {
+      url: "",
+    },
+  });
 
-  //candidateInitial.candidate.image.url;
+  useEffect(() => {
+    let candidateService = new CandidateService();
+    let result = candidateService
+      .findById(31)
+      .then((result) => setCandidate(result.data.data));
+  }, []);
 
   return (
     <div>
       <Menu.Item>
-        {candidateInitials.map((candidateInitial) => (
-          <Image
-            className="profileImages"
-            avatar
-            spaced="right"
-            src={""}
-          />
-        ))}
-
-        <Dropdown pointing="top right" key="1">
+        <Image avatar spaced="right" src={candidate.image.url} />
+        <Dropdown pointing="top right">
           <Dropdown.Menu>
             <Dropdown.Item
               text="Bilgilerim"
               icon="info"
               as={NavLink}
-              to="/profile"
+              to={"/profile/" + candidate.id}
             />
-            <Dropdown.Item text="Çıkış Yap" icon="sign-out" onClick={signOut} />
+            <Dropdown.Item
+              text="Çıkış Yap"
+              icon="sign-out"
+              onClick={props.signOut}
+            />
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
     </div>
   );
+}
+
+{
+  /* {users.map((user) => (
+          <Image
+          avatar
+          spaced="right"
+          src={handleProfilePhoto(user)}
+        />
+        ))} */
 }

@@ -1,7 +1,22 @@
 .App {
   text-align: center;
+  color: white;
 }
 
 .ui.main.container{
   margin-top: 5em;
+}
+
+.App, html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: #599FB7;
+  background-repeat:no-repeat;
+  background: -webkit-linear-gradient( to left top, #000428, #004e92);
+  background: -moz-linear-gradient( to left top, #000428, #004e92);
+  background: -ms-linear-gradient( to left top, #000428, #004e92);
+  background: -o-linear-gradient( to left top, #000428, #004e92);
+  background: linear-gradient( to left top, #000428, #004e92);
 }

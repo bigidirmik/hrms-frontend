@@ -19,7 +19,7 @@ export default class CandidateService{
     }
 
 
-    getCandidateById(candidateId){
+    findById(candidateId){
         return axios.get("http://localhost:8080/api/candidates/findById?candidateId=" + candidateId)
     }
 

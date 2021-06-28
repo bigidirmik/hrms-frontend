@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Profile() {
+export default function CandidateRegister() {
     return (
         <div>
-            Profil Detayı
+            Aday Kayıt
         </div>
     )
 }
