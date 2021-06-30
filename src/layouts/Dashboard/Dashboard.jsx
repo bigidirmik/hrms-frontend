@@ -6,7 +6,7 @@ import JobAdvertisementList from "../../pages/jobAdvertisement/JobAdvertisementL
 import { ToastContainer } from "react-toastify";
 import CandidateLogin from "../../pages/candidate/CandidateLogin";
 import CandidateRegister from "../../pages/candidate/CandidateRegister";
-import FavoriteDetail from "../../pages/jobAdvertisement/FavoriteDetail";
+import FavoritesDetail from "../../pages/jobAdvertisement/FavoritesDetail";
 import JobAdvertisementPost from "../../pages/jobAdvertisement/JobAdvertisementPost";
 
 export default function Dashboard() {
@@ -21,7 +21,7 @@ export default function Dashboard() {
             <Route exact path="/job-advertisements" component={JobAdvertisementList}/>
             <Route exact path="/job-advertisements/:id" component={JobAdvertisementDetail}/>
             <Route exact path="/job-advertisements-post" component={JobAdvertisementPost}/>
-            <Route exact path="/favorite-detail" component={FavoriteDetail}/>
+            <Route exact path="/favorites-detail" component={FavoritesDetail}/>
             <Route exact path="/profile/:id"/>
             <Route exact path="/candidate-login" component={CandidateLogin}/>
             <Route exact path="/candidate-register" component={CandidateRegister}/>

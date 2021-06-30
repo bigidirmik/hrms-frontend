@@ -14,7 +14,7 @@ export default function SignedIn(props) {
 
   useEffect(() => {
     let candidateService = new CandidateService();
-    let result = candidateService
+    candidateService
       .findById(31)
       .then((result) => setCandidate(result.data.data));
   }, []);
@@ -43,7 +43,7 @@ export default function SignedIn(props) {
   );
 }
 
-{
+
   /* {users.map((user) => (
           <Image
           avatar
@@ -51,4 +51,3 @@ export default function SignedIn(props) {
           src={handleProfilePhoto(user)}
         />
         ))} */
-}

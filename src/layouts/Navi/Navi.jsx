@@ -8,9 +8,12 @@ import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
 
 export default function Navi() {
+
+  const {favoriteInitials} = useSelector((state) => state.favorites)
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { candidateInitials } = useSelector((state) => state.candidate);
+  const { userInitials } = useSelector((state) => state.user);
 
   let history = useHistory();
 
@@ -27,25 +30,24 @@ export default function Navi() {
     <div>
       <Menu inverted fixed="top" borderless>
         <Container>
-
           <Menu.Item icon="home" as={NavLink} to="/job-advertisements" />
-          <Menu.Item icon="plus" as={NavLink} to="/job-advertisements-post"/>
+          <Menu.Item icon="plus" as={NavLink} to="/job-advertisements-post" />
 
           <Menu.Menu position="right">
 
-            {isAuthenticated?<Favorites />:null}
-            
+            {isAuthenticated && favoriteInitials.length>0 && <Favorites />}
+
             {isAuthenticated ? (
               <SignedIn signOut={handleSignOut} />
             ) : (
               <SignedOut signIn={handleSignIn} />
             )}
 
-            {candidateInitials.length === 0 && (
+            {userInitials.length === 0 && (
               <SignedOut signIn={handleSignIn} />
             )}
 
-            {candidateInitials.length > 1 && (
+            {userInitials.length > 1 && (
               <SignedIn signOut={handleSignOut} />
             )}
           </Menu.Menu>

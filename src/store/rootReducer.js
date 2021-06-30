@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import candidateReducer from "./reducers/candidateReducer";
+import favoriteReducer from "./reducers/favoriteReducer";
+import userReducer from "./reducers/userReducer";
 
 const rootReducer = combineReducers({
-  candidate: candidateReducer,
+  user: userReducer,
+  favorites: favoriteReducer,
 });
 
 export default rootReducer;

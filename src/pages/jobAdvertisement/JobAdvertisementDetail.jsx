@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Card, Image, Button, Grid, Label, Icon } from "semantic-ui-react";
+import { Card, Image, Button, Icon } from "semantic-ui-react";
 import JobAdvertisementService from "../../services/JobAdvertisement/jobAdvertisementService";
+import { addToFavorites, removeFromFavorites } from "../../store/actions/favoriteActions";
 
 export default function JobAdvertisementDetail() {
+
+  const { favoriteInitials } = useSelector((state) => state.favorites);
+
+  const dispatch = useDispatch()
+
   let { id } = useParams();
 
   const [jobAd, setJobAd] = useState({
@@ -33,6 +40,33 @@ export default function JobAdvertisementDetail() {
     let jobAdService = new JobAdvertisementService();
     jobAdService.findById(id).then((result) => setJobAd(result.data.data));
   }, []);
+
+  const handleFavorites = (jobAdvertisement) => {
+    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    if (result) {
+      dispatch(removeFromFavorites(jobAdvertisement));
+    } else {
+      dispatch(addToFavorites(jobAdvertisement));
+    }
+  };
+
+  const handleColor = (jobAdvertisement) => {
+    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    if (result) {
+      return "red";
+    } else {
+      return "gray";
+    }
+  };
+
+  const handleText = (jobAdvertisement) => {
+    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    if (result) {
+      return "Favori Kaldır";
+    } else {
+      return "Favori Ekle";
+    }
+  };
 
   return (
     <div>
@@ -71,8 +105,8 @@ export default function JobAdvertisementDetail() {
               <Icon name="user" />
               Son Başvuru Tarihi : {jobAd.applicationDeadline}
             </Button>
-            <Button style={{ float: "right" }} color="red">
-              Favori Ekle
+            <Button style={{ float: "right" }} color={handleColor(jobAd)} onClick={() => handleFavorites(jobAd)}>
+              {handleText(jobAd)}
               <Icon name="heart" style={{marginLeft:"0.5em"}} />
             </Button>
           </div>

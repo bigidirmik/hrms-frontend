@@ -1,16 +1,16 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export function login(candidate) {
+export function login(user) {
   return {
     type: LOGIN,
-    payload: candidate,
+    payload: user,
   };
 }
 
-export function logout(candidate) {
+export function logout(user) {
   return {
     type: LOGOUT,
-    payload: candidate
+    payload: user
   };
 }
