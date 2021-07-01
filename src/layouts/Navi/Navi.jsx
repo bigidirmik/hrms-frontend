@@ -35,7 +35,7 @@ export default function Navi() {
 
           <Menu.Menu position="right">
 
-            {isAuthenticated && favoriteInitials.length>0 && <Favorites />}
+            {isAuthenticated && favoriteInitials.length>0 && <Favorites/>}
 
             {isAuthenticated ? (
               <SignedIn signOut={handleSignOut} />

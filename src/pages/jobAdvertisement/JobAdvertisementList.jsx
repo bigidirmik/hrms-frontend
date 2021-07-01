@@ -8,6 +8,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../store/actions/favoriteActions";
+import { toast } from "react-toastify";
 
 export default function JobAdvertisementList() {
   const { favoriteInitials } = useSelector((state) => state.favorites);
@@ -27,8 +28,10 @@ export default function JobAdvertisementList() {
     let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
     if (result) {
       dispatch(removeFromFavorites(jobAdvertisement));
+      toast.info(`${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`)
     } else {
       dispatch(addToFavorites(jobAdvertisement));
+      toast.success(`${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`)
     }
   };
 
@@ -37,7 +40,7 @@ export default function JobAdvertisementList() {
     if (result) {
       return "red";
     } else {
-      return "gray";
+      return "grey";
     }
   };
 

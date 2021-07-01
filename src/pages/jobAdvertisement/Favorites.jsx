@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Dropdown, Label, Divider } from "semantic-ui-react";
+import { Dropdown, Label } from "semantic-ui-react";
 import { removeFromFavorites } from "../../store/actions/favoriteActions";
+import { toast } from "react-toastify";
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -11,26 +12,32 @@ export default function Favorites() {
 
   const handleRemoveFromFavorites = (jobAdvertisement) => {
     dispatch(removeFromFavorites(jobAdvertisement));
+    toast.info(
+      `${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`
+    );
   };
 
   return (
     <div>
       <Dropdown
         pointing="top right"
-        style={{ marginTop: "1.3em" }}
-        text="Favoriler"
+        style={{ marginTop: "1.2em" }}
         icon="heart"
       >
         <Dropdown.Menu>
           {favoriteInitials.map((favoriteInitial) => (
-            <Dropdown.Item as={NavLink} to={`/job-advertisements/${favoriteInitial.jobAdvertisement.id}`}>
-              {favoriteInitial.jobAdvertisement.jobTitle.title}
-              / /
-              {favoriteInitial.jobAdvertisement.employer.companyName}
+            <Dropdown.Item key={favoriteInitial.jobAdvertisement.id}>
+              <Label
+                as={NavLink}
+                to={`/job-advertisements/${favoriteInitial.jobAdvertisement.id}`}
+              >
+                {`${favoriteInitial.jobAdvertisement.jobTitle.title} (${favoriteInitial.jobAdvertisement.employer.companyName})`}
+              </Label>
+
               <Label
                 icon="delete"
                 color="red"
-                style={{ marginLeft: "0.5em" }}
+                style={{ marginLeft: "0.5em"}}
                 onClick={() =>
                   handleRemoveFromFavorites(favoriteInitial.jobAdvertisement)
                 }

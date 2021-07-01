@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Card, Image, Button, Icon } from "semantic-ui-react";
 import JobAdvertisementService from "../../services/JobAdvertisement/jobAdvertisementService";
 import { addToFavorites, removeFromFavorites } from "../../store/actions/favoriteActions";
+import { toast } from "react-toastify";
 
 export default function JobAdvertisementDetail() {
 
@@ -45,8 +46,10 @@ export default function JobAdvertisementDetail() {
     let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
     if (result) {
       dispatch(removeFromFavorites(jobAdvertisement));
+      toast.info(`${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`)
     } else {
       dispatch(addToFavorites(jobAdvertisement));
+      toast.success(`${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`)
     }
   };
 
