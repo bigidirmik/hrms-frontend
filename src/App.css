@@ -1,10 +1,12 @@
 .App {
   text-align: center;
   color: white;
+  padding: 1.5rem 2rem 1rem 2rem;
 }
 
 .ui.main.container{
   margin-top: 5em;
+  height: 715px;
 }
 
 .App, html {

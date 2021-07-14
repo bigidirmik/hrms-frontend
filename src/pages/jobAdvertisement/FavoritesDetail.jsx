@@ -1,10 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Image, Button, Icon } from "semantic-ui-react";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../../store/actions/favoriteActions";
+import { removeFromFavorites } from "../../store/actions/favoriteActions";
 
 export default function FavoriteDetail() {
   const dispatch = useDispatch();
@@ -17,8 +14,6 @@ export default function FavoriteDetail() {
     );
     if (result) {
       dispatch(removeFromFavorites(jobAdvertisement));
-    } else {
-      dispatch(addToFavorites(jobAdvertisement));
     }
   };
 
@@ -28,8 +23,6 @@ export default function FavoriteDetail() {
     );
     if (result) {
       return "red";
-    } else {
-      return "gray";
     }
   };
 
@@ -39,8 +32,6 @@ export default function FavoriteDetail() {
     );
     if (result) {
       return "Favori Kaldır";
-    } else {
-      return "Favori Ekle";
     }
   };
 

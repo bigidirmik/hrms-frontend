@@ -28,6 +28,7 @@ export default function Favorites() {
           {favoriteInitials.map((favoriteInitial) => (
             <Dropdown.Item key={favoriteInitial.jobAdvertisement.id}>
               <Label
+                style={{ marginRigth: "0.5em"}}
                 as={NavLink}
                 to={`/job-advertisements/${favoriteInitial.jobAdvertisement.id}`}
               >
@@ -35,9 +36,8 @@ export default function Favorites() {
               </Label>
 
               <Label
-                icon="delete"
+                icon="window close"
                 color="red"
-                style={{ marginLeft: "0.5em"}}
                 onClick={() =>
                   handleRemoveFromFavorites(favoriteInitial.jobAdvertisement)
                 }

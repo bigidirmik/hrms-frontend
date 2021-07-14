@@ -1,40 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
-import CandidateService from "../../services/Candidate/candidateService";
+import { logout } from "../../store/actions/userActions";
 
-export default function SignedIn(props) {
-  const [candidate, setCandidate] = useState({
-    id: parseInt(""),
-    firstName: "",
-    image: {
-      url: "",
-    },
-  });
+export default function SignedIn() {
+  const { userInitials } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    let candidateService = new CandidateService();
-    candidateService
-      .findById(31)
-      .then((result) => setCandidate(result.data.data));
-  }, []);
+  const dispatch = useDispatch();
+
+  const history = useHistory()
+
+  let user = userInitials[0].user;
+
+  function handleLogout(user) {
+    history.push("/")
+    dispatch(logout(user));
+    toast.info("Çıkış Yapıldı!");
+  }
 
   return (
     <div>
       <Menu.Item>
-        <Image avatar spaced="right" src={candidate.image.url} />
+        <Image
+          avatar
+          spaced="right"
+          src={
+            user.image == null
+              ? "https://res.cloudinary.com/dwsq1lxha/image/upload/v1625941172/115-1150456_avatar-generic-avatar_fhhfkx.jpg"
+              : user.image.url
+          }
+        />
         <Dropdown pointing="top right">
           <Dropdown.Menu>
             <Dropdown.Item
               text="Bilgilerim"
               icon="info"
               as={NavLink}
-              to={"/profile/" + candidate.id}
+              to={"/profile/user/" + user.id }
             />
             <Dropdown.Item
               text="Çıkış Yap"
               icon="sign-out"
-              onClick={props.signOut}
+              onClick={() => handleLogout(user)}
             />
           </Dropdown.Menu>
         </Dropdown>
@@ -42,12 +51,3 @@ export default function SignedIn(props) {
     </div>
   );
 }
-
-
-  /* {users.map((user) => (
-          <Image
-          avatar
-          spaced="right"
-          src={handleProfilePhoto(user)}
-        />
-        ))} */

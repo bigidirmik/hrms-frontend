@@ -2,39 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Card, Image, Button, Icon } from "semantic-ui-react";
-import JobAdvertisementService from "../../services/JobAdvertisement/jobAdvertisementService";
-import { addToFavorites, removeFromFavorites } from "../../store/actions/favoriteActions";
+import JobAdvertisementService from "../../services/jobAdvertisement/jobAdvertisementService";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../store/actions/favoriteActions";
 import { toast } from "react-toastify";
 
 export default function JobAdvertisementDetail() {
-
   const { favoriteInitials } = useSelector((state) => state.favorites);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let { id } = useParams();
 
   const [jobAd, setJobAd] = useState({
     description: "",
-    applicationDeadline:"",
+    applicationDeadline: "",
     jobTitle: {
       title: "",
     },
     employer: {
       companyName: "",
-      logo: {
+      image: {
         url: "",
       },
     },
-    city:{
-      cityName:""
+    city: {
+      cityName: "",
     },
-    typeOfJob:{
-      typeOfJob:""
+    typeOfJob: {
+      typeOfJob: "",
     },
-    workingTime:{
-      workingTime:""
-    }
+    workingTime: {
+      workingTime: "",
+    },
   });
 
   useEffect(() => {
@@ -43,18 +45,26 @@ export default function JobAdvertisementDetail() {
   }, []);
 
   const handleFavorites = (jobAdvertisement) => {
-    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    let result = favoriteInitials.find(
+      (f) => f.jobAdvertisement.id === jobAdvertisement.id
+    );
     if (result) {
       dispatch(removeFromFavorites(jobAdvertisement));
-      toast.info(`${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`)
+      toast.info(
+        `${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`
+      );
     } else {
       dispatch(addToFavorites(jobAdvertisement));
-      toast.success(`${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`)
+      toast.success(
+        `${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`
+      );
     }
   };
 
   const handleColor = (jobAdvertisement) => {
-    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    let result = favoriteInitials.find(
+      (f) => f.jobAdvertisement.id === jobAdvertisement.id
+    );
     if (result) {
       return "red";
     } else {
@@ -63,7 +73,9 @@ export default function JobAdvertisementDetail() {
   };
 
   const handleText = (jobAdvertisement) => {
-    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    let result = favoriteInitials.find(
+      (f) => f.jobAdvertisement.id === jobAdvertisement.id
+    );
     if (result) {
       return "Favori Kaldır";
     } else {
@@ -75,7 +87,7 @@ export default function JobAdvertisementDetail() {
     <div>
       <Card fluid key={jobAd.id}>
         <Card.Content>
-          <Image floated="right" width="100px" src={jobAd.employer.logo.url} />
+          <Image floated="right" width="100px" src={jobAd.employer.image.url} />
           <Card.Header textAlign="left">
             <h1>{jobAd.jobTitle.title}</h1>
           </Card.Header>
@@ -88,7 +100,7 @@ export default function JobAdvertisementDetail() {
         </Card.Content>
         <Card.Content extra>
           <div>
-          <Button style={{ float: "left" }} as="a">
+            <Button style={{ float: "left" }} as="a">
               <Icon name="map" />
               {jobAd.city.cityName}
             </Button>
@@ -108,9 +120,13 @@ export default function JobAdvertisementDetail() {
               <Icon name="user" />
               Son Başvuru Tarihi : {jobAd.applicationDeadline}
             </Button>
-            <Button style={{ float: "right" }} color={handleColor(jobAd)} onClick={() => handleFavorites(jobAd)}>
+            <Button
+              style={{ float: "right" }}
+              color={handleColor(jobAd)}
+              onClick={() => handleFavorites(jobAd)}
+            >
               {handleText(jobAd)}
-              <Icon name="heart" style={{marginLeft:"0.5em"}} />
+              <Icon name="heart" style={{ marginLeft: "0.5em" }} />
             </Button>
           </div>
         </Card.Content>

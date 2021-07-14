@@ -8,24 +8,30 @@ const initialState = {
 export default function userReducer(state = initialState, { type, payload }) {
   switch (type) {
     case LOGIN:
-      let user = state.userInitials.find((uI) => uI.user.id === payload.id);
-      if (user) {
-        return {
-          ...state,
-        };
-      } else {
-        return {
-          ...state,
-          userInitials: [...state.userInitials, { user: payload }],
-        };
+      return{
+        userInitials: [{ user: payload }]
       }
+      // let user = state.userInitials.find((uI) => uI.user.id === payload.id);
+      // if (user) {
+      //   return {
+      //     ...state,
+      //   };
+      // } else {
+      //   return {
+      //     ...state,
+      //     userInitials: [{ user: payload }],
+      //   };
+      // }
     case LOGOUT:
-      return {
-        ...state,
-        userInitials: state.userInitials.filter(
-          (uI) => uI.user.id !== payload.id
-        )
-      };
+      return{
+        userInitials: []
+      }
+      // return {
+      //   ...state,
+      //   userInitials: state.userInitials.filter(
+      //     (uI) => uI.user.id !== payload.id
+      //   )
+      // };
     default:
       return state;
   }

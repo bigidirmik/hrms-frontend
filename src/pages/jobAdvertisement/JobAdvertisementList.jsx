@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Image, Icon, Divider, Label, Segment } from "semantic-ui-react";
 import "../../styles/JobAdvertisementList.css";
-import JobAdvertisementService from "../../services/JobAdvertisement/jobAdvertisementService";
+import JobAdvertisementService from "../../services/jobAdvertisement/jobAdvertisementService";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -50,7 +50,7 @@ export default function JobAdvertisementList() {
         {jobAds.map((jobAd) => (
           <Card key={jobAd.id}>
             <Image
-              src={jobAd.employer.logo.url}
+              src={jobAd.employer.image.url}
               wrapped
               ui={false}
               style={{ height: "225px" }}
@@ -58,6 +58,7 @@ export default function JobAdvertisementList() {
             <Label
               corner="left"
               icon="info"
+              color="olive"
               as={NavLink}
               to={`/job-advertisements/${jobAd.id}`}
             />

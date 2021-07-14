@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function CandidateLogin() {
+export default function JobAdvertisementsConfirm() {
     return (
         <div>
-            Aday Giriş
+            
         </div>
     )
 }

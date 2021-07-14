@@ -30,6 +30,10 @@ export default class JobAdvertisementService{
         return axios.get("http://localhost:8080/api/job-advertisements/getByIsActiveAndEmployerId")
     }
 
+    getJobAdvertisementsByEmployerId(employerId){
+        return axios.get("http://localhost:8080/api/job-advertisements/getByEmployerId?employerId=" + employerId)
+    }
+
     getJobAdvertisementsByQueryActiveAndAppDeadlineAsc(){
         return axios.get("http://localhost:8080/api/job-advertisements/getByQueryActiveAndAppDeadlineAsc")
     }
