@@ -15,12 +15,21 @@ export default class EmployerService{
     }
 
 
-    getEmployerById(){
-        return axios.get("http://localhost:8080/api/employers/findById")
+    getEmployerById(employerId){
+        return axios.get("http://localhost:8080/api/employers/findById?employerId=" + employerId)
     }
 
-    getEmployerByEmail(){
-        return axios.get("http://localhost:8080/api/employers/findByEmail")
+    getEmployerByEmail(email){
+        return axios.get("http://localhost:8080/api/employers/findByEmail?email=" + email)
+    }
+
+    add(values){
+        return axios.post("http://localhost:8080/api/employers/add",values)
+    }
+
+    setConfirmationStatus(personnelId,employerId,status){
+        return axios.post("http://localhost:8080/api/employers/setConfirmationStatus?"+
+        "confirmerSystemPersonnelId="+personnelId+"&employerId="+employerId+"&status="+status)
     }
 
 }

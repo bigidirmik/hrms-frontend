@@ -15,12 +15,12 @@ export default class SystemPersonnelService{
     }
 
 
-    getSystemPersonnelById(){
-        return axios.get("http://localhost:8080/api/system-personnel/findById")
+    getSystemPersonnelById(systemPersonnelId){
+        return axios.get("http://localhost:8080/api/system-personnel/findById?systemPersonnelId="+systemPersonnelId)
     }
 
-    getSystemPersonnelByEmail(){
-        return axios.get("http://localhost:8080/api/system-personnel/findByEmail")
+    getSystemPersonnelByEmail(email){
+        return axios.get("http://localhost:8080/api/system-personnel/findByEmail?email="+email)
     }
 
 }

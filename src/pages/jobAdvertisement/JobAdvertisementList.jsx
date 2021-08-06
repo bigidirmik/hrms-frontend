@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Icon, Divider, Label, Segment } from "semantic-ui-react";
+import { Card, Image, Icon, Label, Segment, Button } from "semantic-ui-react";
 import "../../styles/JobAdvertisementList.css";
 import JobAdvertisementService from "../../services/jobAdvertisement/jobAdvertisementService";
 import { NavLink } from "react-router-dom";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 export default function JobAdvertisementList() {
   const { favoriteInitials } = useSelector((state) => state.favorites);
+  const { userInitials } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -25,18 +26,26 @@ export default function JobAdvertisementList() {
   }, []);
 
   const handleFavorites = (jobAdvertisement) => {
-    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    let result = favoriteInitials.find(
+      (f) => f.jobAdvertisement.id === jobAdvertisement.id
+    );
     if (result) {
       dispatch(removeFromFavorites(jobAdvertisement));
-      toast.info(`${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`)
+      toast.info(
+        `${jobAdvertisement.jobTitle.title} ilanı favorilerden kaldırıldı!`
+      );
     } else {
       dispatch(addToFavorites(jobAdvertisement));
-      toast.success(`${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`)
+      toast.success(
+        `${jobAdvertisement.jobTitle.title} ilanı favorilere eklendi!`
+      );
     }
   };
 
   const handleColor = (jobAdvertisement) => {
-    let result = favoriteInitials.find((f) => f.jobAdvertisement.id === jobAdvertisement.id);
+    let result = favoriteInitials.find(
+      (f) => f.jobAdvertisement.id === jobAdvertisement.id
+    );
     if (result) {
       return "red";
     } else {
@@ -48,61 +57,78 @@ export default function JobAdvertisementList() {
     <div className="jobAdvertisementList">
       <Card.Group>
         {jobAds.map((jobAd) => (
-          <Card key={jobAd.id}>
-            <Image
-              src={jobAd.employer.image.url}
-              wrapped
-              ui={false}
-              style={{ height: "225px" }}
-            />
-            <Label
-              corner="left"
-              icon="info"
-              color="olive"
-              as={NavLink}
-              to={`/job-advertisements/${jobAd.id}`}
-            />
-            <Label
-              corner="right"
-              icon="heart"
-              onClick={() => handleFavorites(jobAd)}
-              as="a"
-              color={handleColor(jobAd)}
-            />
+          <Card fluid key={jobAd.id}>
             <Card.Content>
-              <Card.Header>{jobAd.jobTitle.title}</Card.Header>
-              <Card.Meta>
-                <span>{jobAd.employer.companyName}</span>
+              <Image
+                floated="left"
+                width="100px"
+                src={jobAd.employer.image.url}
+              />
+              <Label
+                corner="left"
+                icon="info"
+                color="olive"
+                as={NavLink}
+                to={`/job-advertisements/${jobAd.id}`}
+              />
+              {userInitials.length > 0 && (
+                <Label
+                  corner="right"
+                  icon="heart"
+                  onClick={() => handleFavorites(jobAd)}
+                  as="a"
+                  color={handleColor(jobAd)}
+                />
+              )}
+              <Card.Header textAlign="center">
+                <h1>{jobAd.jobTitle.title}</h1>
+              </Card.Header>
+              <Card.Meta textAlign="center">
+                <h3>{jobAd.employer.companyName}</h3>
               </Card.Meta>
-              <Divider />
-              <Card.Description>
-                <Label as="a">
-                  <Icon name="user" />
-                  {jobAd.positionQuota}
-                </Label>
-                <Label as="a">
-                  <Icon name="time" />
-                  {jobAd.applicationDeadline}
-                </Label>
-                <Label as="a">
-                  <Icon name="money" />
-                  {jobAd.salaryMin} -{jobAd.salaryMax}
-                </Label>
-                <Divider />
-                <Segment style={{ overflow: "auto", maxHeight: 75 }}>
+              <Card.Description textAlign="center">
+                <Segment
+                  style={{
+                    overflow: "auto",
+                    maxHeight: 75,
+                    width: "85%",
+                    float: "left",
+                  }}
+                >
                   {jobAd.description}
                 </Segment>
               </Card.Description>
+              <Button style={{ float: "right" }} as="a">
+                <Icon name="map marker alternate" />
+                {jobAd.city.cityName}
+              </Button>
             </Card.Content>
             <Card.Content extra>
-              <Label style={{ float: "left" }} as="a">
-                <Icon name="world" />
-                {jobAd.typeOfJob.typeOfJob}
-              </Label>
-              <Label style={{ float: "right" }} as="a">
-                <Icon name="time" />
-                {jobAd.workingTime.workingTime}
-              </Label>
+              <div>
+                <Button style={{ float: "left" }} as="a">
+                  <Icon name="world" />
+                  {jobAd.typeOfJob.typeOfJob}
+                </Button>
+                <Button style={{ float: "left" }} as="a">
+                  <Icon name="clock" />
+                  {jobAd.workingTime.workingTime}
+                </Button>
+                <Button style={{ float: "left" }} as="a">
+                  <Icon name="user" />
+                  Açık Pozisyon : {jobAd.positionQuota}
+                </Button>
+                <Button style={{ float: "left" }} as="a">
+                  <Icon name="calendar alternate" />
+                  Son Başvuru : {jobAd.applicationDeadline}
+                </Button>
+                <Button style={{ float: "left" }} as="a">
+                  <Icon name="money" />
+                  Ücret : {jobAd.salaryMin > 0
+                    ? `${jobAd.salaryMin} /`
+                    : null}{" "}
+                  {jobAd.salaryMax > 0 ? jobAd.salaryMax : null} ₺
+                </Button>
+              </div>
             </Card.Content>
           </Card>
         ))}

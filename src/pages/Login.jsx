@@ -44,7 +44,7 @@ export default function Login() {
   }
 
   return (
-    <div style={{ width: "25%", margin: "auto" }}>
+    <div style={{ width: "25%", margin: "auto", marginTop: "15%" }}>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}

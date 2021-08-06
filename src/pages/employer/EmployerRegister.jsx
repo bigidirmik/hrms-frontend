@@ -3,8 +3,14 @@ import { Button } from 'semantic-ui-react';
 import MyInput from '../../utilities/customFormControls/MyInput';
 import * as Yup from "yup"
 import { Formik, Form } from 'formik';
+import EmployerService from "../../services/employer/employerService"
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 export default function EmployerRegister() {
+
+  let history = useHistory();
+
     const initialValues = {
         companyName: "",
         phoneNumber: "",
@@ -23,12 +29,18 @@ export default function EmployerRegister() {
         confirmPassword: Yup.string().required("Şifre tekrarı zorunludur!").oneOf([Yup.ref("password")]),
       });
 
+      function handleRegister(values) {
+        let employerService = new EmployerService();
+        employerService.add(values).then(toast.success(`Kayıt başarılı: ${values.companyName}!`))
+        history.push("/")
+      }
+
     return (
         <div style={{ width: "25%", margin: "auto" }}>
       <Formik
       initialValues={initialValues}
       validationSchema={schema}
-      onSubmit={(values)=>{console.log(values)}}
+      onSubmit={(values)=>{handleRegister(values)}}
       >
         <Form className="ui form">
             <strong>Şirket Adı</strong>

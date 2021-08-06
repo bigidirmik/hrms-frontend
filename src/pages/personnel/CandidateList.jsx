@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import CandidateService from "../../services/candidate/candidateService";
 
 export default function EmployerActivation() {
   const [candidates, setCandidates] = useState([]);
 
+  const {userInitials} = useSelector(state => state.user)
+
+    let history = useHistory()
+
   useEffect(() => {
-    let candidateService = new CandidateService();
+    if (userInitials.length>0) {
+      let candidateService = new CandidateService();
     candidateService
       .getCandidates()
       .then((result) => setCandidates(result.data.data));
+    } else {
+      history.push("/")
+    }
   }, []);
 
   return (

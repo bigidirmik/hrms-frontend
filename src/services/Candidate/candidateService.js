@@ -6,6 +6,14 @@ export default class CandidateService{
         return axios.post("http://localhost:8080/api/candidates/add",values)
     }
 
+    update(values){
+        return axios.put("http://localhost:8080/api/candidates/update",values)
+    }
+
+    delete(id){
+        return axios.delete("http://localhost:8080/api/candidates/delete?id="+id)
+    }
+
     getCandidates(){
         return axios.get("http://localhost:8080/api/candidates/getAll")
     }
@@ -19,7 +27,7 @@ export default class CandidateService{
     }
 
 
-    findById(candidateId){
+    getCandidateById(candidateId){
         return axios.get("http://localhost:8080/api/candidates/findById?candidateId=" + candidateId)
     }
 

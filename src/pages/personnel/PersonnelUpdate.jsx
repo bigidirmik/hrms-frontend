@@ -22,7 +22,6 @@ export default function PersonnelUpdate() {
       email: "",
       oldPassword: "",
       newPassword: "",
-      confirmNewPassword: "",
       firstName: "",
       lastName: "",
       nationalityId: "",
@@ -41,7 +40,6 @@ export default function PersonnelUpdate() {
   })
 
   function handleUpdate(values) {
-      console.log(values)
   }
 
   return (

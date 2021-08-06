@@ -1,46 +1,72 @@
 import axios from "axios";
 
-export default class JobAdvertisementService{
+export default class JobAdvertisementService {
+  getJobAdvertisementById(jobAdvertisementId) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/findById?jobAdvertisementId=" +
+        jobAdvertisementId
+    );
+  }
 
-    findById(id){
-        return axios.get("http://localhost:8080/api/job-advertisements/findById?id=" + id)
-    }
+  getJobAdvertisements() {
+    return axios.get("http://localhost:8080/api/job-advertisements/getAll");
+  }
 
-    getJobAdvertisements(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getAll")
-    }
+  getJobAdvertisementsAsc() {
+    return axios.get("http://localhost:8080/api/job-advertisements/getAllAsc");
+  }
 
-    getJobAdvertisementsAsc(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getAllAsc")
-    }
+  getJobAdvertisementsByPage() {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getAllByPage"
+    );
+  }
 
-    getJobAdvertisementsByPage(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getAllByPage")
-    }
+  getJobAdvertisementsByIsActive(isActive) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getByIsActive?isActive=" +
+        isActive
+    );
+  }
 
-    getJobAdvertisementsByIsActive(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getByIsActive")
-    }
+  getJobAdvertisementsByIsActiveAndApplicationDeadline(
+    applicationDeadline,
+    isActive
+  ) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getByIsActiveAndApplicationDeadline?applicationDeadline=" +
+        applicationDeadline +
+        "&isActive=" +
+        isActive
+    );
+  }
 
-    getJobAdvertisementsByIsActiveAndApplicationDeadline(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getByIsActiveAndApplicationDeadline")
-    }
+  getJobAdvertisementsByIsActiveAndEmployerId(employerId,isActive) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getByIsActiveAndEmployerId?employerId="+employerId+"&isActive="+isActive
+    );
+  }
 
-    getJobAdvertisementsByIsActiveAndEmployerId(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getByIsActiveAndEmployerId")
-    }
+  getJobAdvertisementsByEmployerId(employerId) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getByEmployerId?employerId=" +
+        employerId
+    );
+  }
 
-    getJobAdvertisementsByEmployerId(employerId){
-        return axios.get("http://localhost:8080/api/job-advertisements/getByEmployerId?employerId=" + employerId)
-    }
+  getJobAdvertisementsByQueryActiveAndAppDeadlineAsc(applicationDeadline,isActive) {
+    return axios.get(
+      "http://localhost:8080/api/job-advertisements/getByQueryActiveAndAppDeadlineAsc?applicationDeadline=" +
+      applicationDeadline +
+      "&isActive=" +
+      isActive
+    );
+  }
 
-    getJobAdvertisementsByQueryActiveAndAppDeadlineAsc(){
-        return axios.get("http://localhost:8080/api/job-advertisements/getByQueryActiveAndAppDeadlineAsc")
-    }
-
-
-    add(values){
-        return axios.post("http://localhost:8080/api/job-advertisements/add",values)
-    }
-
+  add(values) {
+    return axios.post(
+      "http://localhost:8080/api/job-advertisements/add",
+      values
+    );
+  }
 }

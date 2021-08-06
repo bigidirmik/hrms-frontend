@@ -20,7 +20,7 @@ export default function Navi() {
         return <Menu.Item icon="plus" as={NavLink} to="/job-advertisements-add" />
       }
       else{
-        return <Menu.Item icon="file alternate" as={NavLink} to="/resume-add" />
+        return <Menu.Item icon="file alternate" as={NavLink} to={userInitials[0].user.resume?"/resume":"/resume-add"} />
       }
     }
   }

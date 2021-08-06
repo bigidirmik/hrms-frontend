@@ -2,16 +2,16 @@ import axios from "axios";
 
 export default class ImageService{
 
-    getImageById(){
-        return axios.get("http://localhost:8080/api/images/getById")
+    getImageById(imageId){
+        return axios.get("http://localhost:8080/api/images/getById?imageId=" + imageId)
     }
 
-    getImageByCandidateId(){
-        return axios.get("http://localhost:8080/api/images/getByCandidateId")
+    getImageByCandidateId(candidateId){
+        return axios.get("http://localhost:8080/api/images/getByCandidateId?candidateId=" + candidateId)
     }
 
-    getImageByEmployerId(){
-        return axios.get("http://localhost:8080/api/images/getByEmployerId")
+    getImageByEmployerId(employerId){
+        return axios.get("http://localhost:8080/api/images/getByEmployerId?employerId=" + employerId)
     }
 
 }

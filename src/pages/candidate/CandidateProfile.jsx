@@ -19,7 +19,7 @@ export default function CandidateProfile() {
             : user.image.url
           }
           wrapped
-          ui={false}
+          ui={true}
         />
         <Card.Content>
           <Card.Header>{user.firstName} {user.lastName}</Card.Header>

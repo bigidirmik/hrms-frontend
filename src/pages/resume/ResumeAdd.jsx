@@ -1,16 +1,21 @@
 import { Form, Formik } from "formik";
 import React from "react";
+import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import MyInput from "../../utilities/customFormControls/MyInput";
 import MySelect from "../../utilities/customFormControls/MySelect";
-import MyTextArea from "../../utilities/customFormControls/MyTextArea"
+import MyTextArea from "../../utilities/customFormControls/MyTextArea";
 
 export default function ResumeAdd() {
+
   const initialValues = {
     candidate: "",
 
     image: "",
-    networks: "",
+    networks: {
+      networkName: "",
+      networkUrl: "",
+    },
 
     coverLetter: "",
 
@@ -26,7 +31,7 @@ export default function ResumeAdd() {
   };
 
   const schema = Yup.object({
-    networks: Yup.string(),
+    networkName: Yup.string().lowercase("yalnızca küçük harf"),
 
     coverLetter: Yup.string().required("Alan zorunlu!"),
     firstName: Yup.string().required("Alan zorunlu!"),
@@ -49,28 +54,28 @@ export default function ResumeAdd() {
         }}
       >
         <Form className="ui form">
-          <strong>Profil Fotoğrafı</strong>
-          <MyInput />
-          <strong>firstName</strong>
-          <MyInput name="firstName" placeholder="firstName" />
-          <strong>lastName</strong>
-          <MyInput name="lastName" placeholder="lastName" />
-          <strong>nationalityId</strong>
-          <MyInput name="nationalityId" placeholder="nationalityId" type="number" />
-          <strong>birthOfDate</strong>
-          <MyInput name="birthOfDate" placeholder="birthOfDate" type="date" />
-          <strong>Ağlar</strong>
-          <MyInput name="networks" placeholder="Ağ Profil Linki" />
           <strong>coverLetter</strong>
           <MyTextArea name="coverLetter" placeholder="coverLetter" />
+
           <strong>languages</strong>
-          <MySelect name="languages" placeholder="languages" type="number" />
+          <MySelect name="languages" placeholder="languages" />
+
           <strong>educations</strong>
           <MyInput name="educations" placeholder="educations" />
+
           <strong>skills</strong>
           <MyInput name="skills" placeholder="skills" />
+
           <strong>workExperiences</strong>
           <MyInput name="workExperiences" placeholder="workExperiences..." />
+
+          <strong>Ağlar</strong>
+          <MyInput name="networkName" placeholder="küçük harflerle ağ ismi" />
+          <MyInput name="networkUrl" placeholder="Ağ Profil Linki" />
+
+          <Button primary type="submit">
+            CV EKLE
+          </Button>
         </Form>
       </Formik>
     </div>

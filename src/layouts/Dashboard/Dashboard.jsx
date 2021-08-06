@@ -18,6 +18,7 @@ import EmployerList from "../../pages/personnel/EmployerList";
 import EmployerJobAds from "../../pages/personnel/EmployerJobAds";
 import JobAdvertisementsConfirm from "../../pages/personnel/JobAdvertisementsConfirm"
 import CandidateUpdate from "../../pages/candidate/CandidateUpdate";
+import Resume from "../../pages/resume/Resume";
 
 export default function Dashboard() {
 
@@ -35,6 +36,8 @@ export default function Dashboard() {
             <Route exact path="/job-advertisements-confirm" component={JobAdvertisementsConfirm} />
 
             <Route exact path="/favorites-detail" component={FavoritesDetail}/>
+
+            <Route exact path="/resume" component={Resume} />
             <Route exact path="/resume-add" component={ResumeAdd} />
 
             <Route exact path="/login" component={Login}/>

@@ -15,12 +15,12 @@ export default class CityService{
     }
 
 
-    getCityById(){
-        return axios.get("http://localhost:8080/api/cities/findById")
+    getCityById(cityId){
+        return axios.get("http://localhost:8080/api/cities/findById?cityId=" + cityId)
     }
 
-    getCityByName(){
-        return axios.get("http://localhost:8080/api/cities/findByCityName")
+    getCityByName(cityName){
+        return axios.get("http://localhost:8080/api/cities/findByCityName?cityName=" + cityName)
     }
 
 }
